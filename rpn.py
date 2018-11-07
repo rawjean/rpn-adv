@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import operator
+import readline
 
 
 operators = {
