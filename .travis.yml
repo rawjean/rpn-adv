@@ -3,5 +3,4 @@ python:
   - "3.5"
 script: 
   - make test
-  - coverage run test_rpn.py
-  
+  #- coverage run test_rpn.py
