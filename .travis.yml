@@ -3,6 +3,7 @@ python:
   - "3.5"
 install:
   - pip install coverage
+  - pip install colored --upgrade
 script: 
   - make test
   - coverage run test_rpn.py
