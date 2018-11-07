@@ -1,33 +1,37 @@
 #!/usr/bin/env python3
+
 import operator
 
-op = {'+': operator.add, '-': operator.sub, '*': operator.mul, '/': operator.floordiv}
-def calculate(arg):
-	# stack for calculator
-	stack = arg.split()
 
-	# process tokens
-	while len(stack) > 1:
-		token = stack.pop()
-		try:
-			value = int(token)
-			stack.append(value)
-		except ValueError:
-			val2 = int(stack.pop())
-			val1 = int(stack.pop())
+operators = {
+    '+': operator.add,
+    '-': operator.sub,
+    '*': operator.mul,
+    '/': operator.truediv,
+    '^': operator.pow,
+}
 
-			# Look up function
-			func = op[token]
-			result = func(val1, val2)
-
-			stack.append(str(result))
-
-	return int(stack[0])
+def calculate(myarg):
+    stack = list()
+    for token in myarg.split():
+        try:
+            token = int(token)
+            stack.append(token)
+        except ValueError:
+            function = operators[token]
+            arg2 = stack.pop()
+            arg1 = stack.pop()
+            result = function(arg1, arg2)
+            stack.append(result)
+        print(stack)
+    if len(stack) != 1:
+        raise TypeError("Too many parameters")
+    return stack.pop()
 
 def main():
-	while True:
-		result = calculate(input('rpn calc> '))
-		print(result)
+    while True:
+        result = calculate(input("rpn calc> "))
+        print("Result: ", result)
 
-if __name__ == '__main__': 
-	main()
+if __name__ == '__main__':
+    main()
